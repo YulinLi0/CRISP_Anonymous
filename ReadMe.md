@@ -1,5 +1,5 @@
 # CRISP: Robust Contact-Implicit Motion Planning with Sequential Convex Programming
-[**CRISP**](https://computationalrobotics.seas.harvard.edu/CRISP/) is a C++ library developed to efficiently solve contact-implicit motion planning problems, using a customized trust region Sequential Convex Programming (SCP) algorithm.
+[**CRISP**] is a C++ library developed to efficiently solve contact-implicit motion planning problems, using a customized trust region Sequential Convex Programming (SCP) algorithm.
 
 **CRISP** computes entirely new contact sequences from naive and even all-zero initializations.
 
