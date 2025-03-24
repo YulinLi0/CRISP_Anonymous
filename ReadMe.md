@@ -1,5 +1,5 @@
 # CRISP: Robust Contact-Implicit Motion Planning with Sequential Convex Programming
-[**CRISP**] is a C++ library developed to efficiently solve contact-implicit motion planning problems, using a customized trust region Sequential Convex Programming (SCP) algorithm.
+**CRISP** is a C++ library developed to efficiently solve contact-implicit motion planning problems, using a customized trust region Sequential Convex Programming (SCP) algorithm.
 
 **CRISP** computes entirely new contact sequences from naive and even all-zero initializations.
 
@@ -46,7 +46,15 @@
 
 - Python interface **pyCRISP** is available through pybind11, enabling dynamic parameter adjustments and solver execution within a Python environment.
 
-- All the sparse matrix and vector operations within the library are optimized and accelerated by directly memory copying under Eigen Compressed Row Storage (CRS) scheme. The large-scale sparse convex Quadratic Programming (QP) subproblems that arise are tackled using the Proximal Interior Point Quadratic Programming Solver ([PIQP](https://github.com/PREDICT-EPFL/piqp)).   
+- All the sparse matrix and vector operations within the library are optimized and accelerated by directly memory copying under Eigen Compressed Row Storage (CRS) scheme. The large-scale sparse convex Quadratic Programming (QP) subproblems that arise are tackled using the Proximal Interior Point Quadratic Programming Solver ([PIQP](https://github.com/PREDICT-EPFL/piqp)).
+
+## Rebuttal
+1. We have added the push T task to CRISP, including both simulation and real-world experiments. The results have been visualized, and a video showcasing the outcomes has been provided.
+
+2. We also provide the source code to reproduce the benchmarks added in this rebuttal. Specifically:
+   - For push T task, we provide the MIQCP formulation as well as its gurobi implementation in `./rebuttal/pushT/pushT_gurobi.jl`. Also, we provide the source code of [GCS push T](https://github.com/bernhardpg/planning-through-contact) for different initial states in `./rebuttal/pushT/GCS_planar_pushing.ipynb`.
+   - For the linear complementarity problem (LCP), we implement the transport and waiter problem following the LCP formulation in [LCQPow](https://github.com/hallfjonas/LCQPow), and the source code are provided in `./rebuttal/LCP/LCQPow`. Also, the [ADMM implementation of cartpole with softwall](https://github.com/AlpAydinoglu/coptimal/tree/main/Conference%20(ICRA2022)/cartpole) with linearized dynamics is provided in `./rebuttal/LCP/ADMM/main.py`.  
+
 
 
 ## Table of Contents
@@ -66,7 +74,7 @@
 ## 1. Installation Instructions
 Download the source code from the repository
 ### 1.1 Prerequisites
-- This library is developed and tested on Ubuntu 20.04/22,04.
+- This library is developed and tested on Ubuntu 20.04/22.04.
 - Install Common Library through `sudo apt install`
     - CMake
     - Eigen3
