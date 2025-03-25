@@ -58,7 +58,8 @@
 
 2. We also provide the source code to reproduce the benchmarks added in this rebuttal. Specifically:
    - For push T task, we provide the MIQCP formulation as well as its gurobi implementation in `./rebuttal/pushT/pushT_gurobi.jl`. Also, we provide the source code of [GCS push T](https://github.com/bernhardpg/planning-through-contact) for different initial states in `./rebuttal/pushT/GCS_planar_pushing.ipynb`.
-   - For the linear complementarity problem (LCP), we implement the transport and waiter problem following the LCP formulation in [LCQPow](https://github.com/hallfjonas/LCQPow), and the source code are provided in `./rebuttal/LCP/LCQPow`. Also, the [ADMM implementation of cartpole with softwall](https://github.com/AlpAydinoglu/coptimal/tree/main/Conference%20(ICRA2022)/cartpole) with linearized dynamics is provided in `./rebuttal/LCP/ADMM/main.py`.  
+   - For the linear complementarity problem (LCP), we implement the transport and waiter problem following the LCP formulation in [LCQPow](https://github.com/hallfjonas/LCQPow), and the source code are provided in `./rebuttal/LCP/LCQPow`. Also, the [ADMM implementation of cartpole with softwall](https://github.com/AlpAydinoglu/coptimal/tree/main/Conference%20(ICRA2022)/cartpole) with linearized dynamics is provided in `./rebuttal/LCP/ADMM/main.py`.
+3. We add the visualization of the cube landing problem solved by CRISP with 3D friction cone.
 
 
 

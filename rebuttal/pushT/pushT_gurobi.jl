@@ -1,3 +1,4 @@
+
 using Pkg
 Pkg.activate(".")
 using JuMP
@@ -26,7 +27,7 @@ const R = Diagonal([1.0, 1.0])
 
 # All continuous states = [sx sy px py rc rs fc fs Fx Fy] 
 # All binary states = [lambda1 - lambda8]
-const N = 10 # 10, 0.1 should be ok, but I use 50 steps in mine.
+const N = 4# 10, 0.1 should be ok, but I use 50 steps in mine.
 const dt = 0.1
 const num_continuous_states = 10
 const num_binary_states = 8
@@ -82,54 +83,39 @@ function add_contact_constraints!(model, x_continuous, x_discrete)
         px, py, Fx, Fy = current_state[3], current_state[4], current_state[9], current_state[10]
 
         # Constraints for λ₁
-        @constraint(model, lambda[1] * (py - y3) == 0)
+        @constraint(model, lambda[1] * (py - y3) + lambda[2] * (px - x4) + lambda[3] * (py - y2) + lambda[4] * (px - x3) + lambda[5] * (py - y1) + lambda[6] * (px - x2) + lambda[7] * (py - y2) + lambda[8] * (px - x1) + lambda[1] * Fx + lambda[2] * Fy + lambda[3] * Fx + lambda[4] * Fy + lambda[5] * Fx + lambda[6] * Fy + lambda[7] * Fx + lambda[8] * Fy == 0)
         @constraint(model, lambda[1] * (px - x1) >= 0)
         @constraint(model, lambda[1] * (x4 - px) >= 0)
         @constraint(model, lambda[1] * (-Fy) >= 0)
-        @constraint(model, lambda[1] * Fx == 0)
 
         # Constraints for λ₂ to λ₈ (similar logic)
-        @constraint(model, lambda[2] * (px - x4) == 0)
         @constraint(model, lambda[2] * (py - y2) >= 0)
         @constraint(model, lambda[2] * (y3 - py) >= 0)
         @constraint(model, lambda[2] * (-Fx) >= 0)
-        @constraint(model, lambda[2] * Fy == 0)
 
-        @constraint(model, lambda[3] * (py - y2) == 0)
         @constraint(model, lambda[3] * (px - x3) >= 0)
         @constraint(model, lambda[3] * (x4 - px) >= 0)
         @constraint(model, lambda[3] * Fy >= 0)
-        @constraint(model, lambda[3] * Fx == 0)
 
-        @constraint(model, lambda[4] * (px - x3) == 0)
         @constraint(model, lambda[4] * (py - y1) >= 0)
         @constraint(model, lambda[4] * (y2 - py) >= 0)
         @constraint(model, lambda[4] * (-Fx) >= 0)
-        @constraint(model, lambda[4] * Fy == 0)
 
-        @constraint(model, lambda[5] * (py - y1) == 0)
         @constraint(model, lambda[5] * (px - x2) >= 0)
         @constraint(model, lambda[5] * (x3 - px) >= 0)
         @constraint(model, lambda[5] * (Fy) >= 0)
-        @constraint(model, lambda[5] * Fx == 0)
 
-        @constraint(model, lambda[6] * (px - x2) == 0)
         @constraint(model, lambda[6] * (py - y1) >= 0)
         @constraint(model, lambda[6] * (y2 - py) >= 0)
         @constraint(model, lambda[6] * (Fx) >= 0)
-        @constraint(model, lambda[6] * Fy == 0)
 
-        @constraint(model, lambda[7] * (py - y2) == 0)
         @constraint(model, lambda[7] * (px - x1) >= 0)
         @constraint(model, lambda[7] * (x2 - px) >= 0)
         @constraint(model, lambda[7] * Fy >= 0)
-        @constraint(model, lambda[7] * Fx == 0)
 
-        @constraint(model, lambda[8] * (px - x1) == 0)
         @constraint(model, lambda[8] * (py - y2) >= 0)
         @constraint(model, lambda[8] * (y3 - py) >= 0)
         @constraint(model, lambda[8] * (Fx) >= 0)
-        @constraint(model, lambda[8] * Fy == 0)
     end
 end
 
@@ -187,7 +173,7 @@ for i in 0:20:0
     println("Solving pushT with terminal state: $terminal_state")
     
     # Initialize model using Gurobi as the optimizer
-    model = Model(Ipopt.Optimizer)
+    model = Model(Gurobi.Optimizer)
     
     # Set solver options (uncomment any options you need)
     # set_optimizer_attribute(model, "OutputFlag", 1)
