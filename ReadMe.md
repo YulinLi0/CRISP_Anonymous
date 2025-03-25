@@ -38,6 +38,11 @@
   <img src="files/pushTREALWORLD.gif" width="600" height="300"/>
 </div>
 
+<div align="center">
+  <h3>Cube Landing (with 3D friction cone)</h3>
+  <img src="files/cube_animation.gif" width="600" height="400"/>
+</div>
+
 ## Features
 - **CRISP** leverages [CppAD](https://coin-or.github.io/CppAD/doc/cppad.htm) and its companion, [CppADCodeGen](https://joaoleal.github.io/CppADCodeGen/), to facilitate rapid and efficient computation of necessary values and derivatives. This approach automates the generation of autodiff libraries, requiring users only to define the objective and constraint value functions. These libraries are compiled during the initial run and reused in subsequent operations, optimizing computational efficiency.
 
@@ -68,7 +73,6 @@
   - [General Workflow](#31-general-workflow)
   - [C++ Interface](#32-c-interface)
   - [Python Interface](#33-python-interface)
-- [Citing Our Work](#4-citing-our-work)
 
 
 ## 1. Installation Instructions
